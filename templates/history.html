@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History - Trashstructure V1.3</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" width="30" height="30" class="d-inline-block align-top">
+            Trashstructure V1.3
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('history') }}">History</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                </li>
+                <li class="nav-item">
+                    <span class="nav-link">
+                        Selamat datang, {{ user }}!
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h1>History</h1>
+        <table class="table table-striped" style="border-bottom-style: solid;margin-bottom: 200px;border-bottom-width: 0px;">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Weight (kg)</th>
+                    <th>Trash Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in history_entries[::-1] %} {# Iterate in reverse order #}
+                <tr>
+                    <td><img src="{{ url_for('static', filename=entry[1].replace('static/', '')) }}" alt="Trash Image" width="100"></td>
+                    <td>{{ entry[2] }}</td>
+                    <td>{{ entry[3] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <footer class="text-center mt-5">
+        Dibuat oleh tim Ambatron untuk Gemastik 2024 - We love trash!
+    </footer>
+</body>
+</html>
