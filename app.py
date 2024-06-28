@@ -10,6 +10,11 @@ from translate import Translator
 import random
 import logging
 import shutil
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
 
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'  # Replace with your secret key
@@ -23,7 +28,7 @@ if not os.path.exists(UPLOAD_FOLDER):
 # Initialize the InferenceHTTPClient
 CLIENT = InferenceHTTPClient(
     api_url="https://detect.roboflow.com",
-    api_key="nXHlQP10OlbsjZEzF2Re"
+    api_key= os.getenv('ROBOFLOW_API_KEY')
 )
 # Define custom configuration with confidence threshold
 custom_configuration = InferenceConfiguration(confidence_threshold=0.3)
